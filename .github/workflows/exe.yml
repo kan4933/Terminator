@@ -1,0 +1,19 @@
+name: Build Terminator
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build with MSBuild
+        run: msbuild Terminator.sln /p:Configuration=Release
+      - name: Upload EXE Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TerminatorExe
+          path: path/to/Terminator.exe
